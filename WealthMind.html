@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WealthMind — Turn Knowledge Into Real Income</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080B10;--bg2:#0E1117;--bg3:#141924;--bg4:#1C2333;--border:rgba(255,255,255,0.07);--border2:rgba(99,179,237,0.22);--gold:#F5A623;--gold2:#FFD166;--blue:#63B3ED;--blue2:#4299E1;--green:#48BB78;--red:#FC8181;--text:#E8EDF5;--muted:#8892A4;--muted2:#5C6878;--font-h:'Syne',sans-serif;--font-b:'Outfit',sans-serif;--r:14px;--shadow:0 4px 24px rgba(0,0,0,0.4);--shadow2:0 8px 48px rgba(0,0,0,0.6)}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:var(--font-b);overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:rgba(99,179,237,0.3);border-radius:3px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulseGlow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.9;transform:scale(1.04)}}
+@keyframes slideIn{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideOut{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
+@keyframes shimmerFill{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.anim-up{animation:fadeUp .55s ease both}.anim-in{animation:fadeIn .4s ease both}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:0 52px;height:68px;background:rgba(8,11,16,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);transition:all .3s}
+.nav.sc{background:rgba(8,11,16,.97);box-shadow:var(--shadow)}
+.nav-logo{font-family:var(--font-h);font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}
+.nav-logo em{-webkit-text-fill-color:var(--text);font-style:normal;font-weight:300}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nl{color:var(--muted);font-size:.87rem;font-weight:500;background:none;border:none;cursor:pointer;padding:8px 13px;border-radius:8px;transition:all .2s;font-family:var(--font-b)}
+.nl:hover{color:var(--text);background:rgba(255,255,255,.06)}
+.nl.act{color:var(--blue)}
+.nb{padding:9px 20px;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;font-family:var(--font-b);transition:all .2s}
+.nb-g{background:transparent;color:var(--blue);border:1px solid rgba(99,179,237,.35)}
+.nb-g:hover{background:rgba(99,179,237,.1)}
+.nb-p{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0D1117;font-weight:700}
+.nb-p:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(245,166,35,.35)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:8px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:all .3s}
+.mob-menu{display:none;position:fixed;top:68px;left:0;right:0;z-index:800;background:var(--bg2);border-bottom:1px solid var(--border);padding:16px;flex-direction:column;gap:4px}
+.mob-menu.open{display:flex;animation:fadeIn .2s ease}
+.ml{color:var(--muted);font-size:.9rem;font-weight:500;background:none;border:none;cursor:pointer;padding:11px 16px;border-radius:8px;text-align:left;font-family:var(--font-b);transition:all .2s;width:100%}
+.ml:hover{color:var(--text);background:var(--bg3)}
+
+/* HERO */
+.hero{min-height:100vh;padding:148px 52px 100px;display:flex;align-items:center;position:relative;overflow:hidden}
+.hg1{position:absolute;top:-120px;right:-80px;width:600px;height:600px;background:radial-gradient(circle,rgba(245,166,35,.1) 0%,transparent 70%);animation:pulseGlow 5s ease-in-out infinite;pointer-events:none}
+.hg2{position:absolute;bottom:-80px;left:-80px;width:500px;height:500px;background:radial-gradient(circle,rgba(99,179,237,.09) 0%,transparent 70%);animation:pulseGlow 6s ease-in-out infinite 2s;pointer-events:none}
+.hgrid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(99,179,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(99,179,237,.04) 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%)}
+.hero-c{max-width:760px;position:relative;z-index:2}
+.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.25);padding:6px 16px;border-radius:100px;font-size:.74rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:28px;animation:fadeUp .5s ease both}
+.bdot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulseGlow 2s infinite}
+h1{font-family:var(--font-h);font-size:clamp(2.6rem,5.5vw,4.6rem);font-weight:800;line-height:1.06;margin-bottom:24px;animation:fadeUp .5s .1s ease both}
+.tg{background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tb{background:linear-gradient(135deg,var(--blue),#9F7AEA);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.12rem;color:var(--muted);line-height:1.75;margin-bottom:40px;max-width:580px;animation:fadeUp .5s .2s ease both}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp .5s .3s ease both}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;font-size:.93rem;font-weight:600;cursor:pointer;border:none;font-family:var(--font-b);transition:all .25s;text-decoration:none}
+.btn-gld{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0D1117}
+.btn-gld:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(245,166,35,.4)}
+.btn-out{background:transparent;color:var(--blue);border:1px solid rgba(99,179,237,.35)}
+.btn-out:hover{background:rgba(99,179,237,.1);transform:translateY(-2px)}
+.btn-blu{background:linear-gradient(135deg,var(--blue2),#3182CE);color:#fff}
+.btn-blu:hover{transform:translateY(-2px);box-shadow:0 10px 36px rgba(66,153,225,.35)}
+.btn-sm{padding:9px 20px;font-size:.82rem;border-radius:8px}
+.btn-xs{padding:7px 13px;font-size:.76rem;border-radius:7px}
+.hero-stats{display:flex;gap:44px;margin-top:60px;padding-top:38px;border-top:1px solid var(--border);animation:fadeUp .5s .4s ease both;flex-wrap:wrap}
+.sn{font-family:var(--font-h);font-size:1.9rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sl{font-size:.75rem;color:var(--muted);margin-top:4px}
+
+/* SECTIONS */
+.sec{padding:96px 52px}
+.sec-alt{background:var(--bg2)}
+.sec-lbl{font-size:.7rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--blue);font-weight:700;margin-bottom:12px}
+.sec-title{font-family:var(--font-h);font-size:clamp(1.8rem,3.5vw,2.7rem);font-weight:800;line-height:1.1;margin-bottom:14px}
+.sec-sub{color:var(--muted);font-size:.97rem;line-height:1.72;max-width:520px;margin-bottom:52px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+
+/* CARDS */
+.card{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:all .3s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(99,179,237,.2),transparent);transform:scaleX(0);transition:transform .4s}
+.card:hover{border-color:rgba(99,179,237,.2);transform:translateY(-5px);box-shadow:0 16px 48px rgba(0,0,0,.5)}
+.card:hover::before{transform:scaleX(1)}
+.step-n{font-family:var(--font-h);font-size:3.2rem;font-weight:800;color:rgba(99,179,237,.08);line-height:1;margin-bottom:12px}
+.ci{font-size:1.9rem;margin-bottom:14px}
+.card h3{font-family:var(--font-h);font-size:1.02rem;font-weight:700;margin-bottom:10px}
+.card p{font-size:.86rem;color:var(--muted);line-height:1.65}
+.earn-b{display:inline-block;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:100px;margin-bottom:12px}
+.sl-1{border-left:3px solid var(--gold)}
+.sl-2{border-left:3px solid var(--blue)}
+.sl-3{border-left:3px solid #9F7AEA}
+.sl-4{border-left:3px solid var(--green)}
+
+/* TOOL CARDS */
+.tc{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:24px;transition:all .3s;position:relative;overflow:hidden}
+.tc:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--shadow2)}
+.tc-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:10px}
+.t-tag{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:3px 8px;border-radius:100px;white-space:nowrap}
+.t-em{font-size:2rem;margin-bottom:10px}
+.t-nm{font-family:var(--font-h);font-size:.97rem;font-weight:700;margin-bottom:6px}
+.t-ds{font-size:.81rem;color:var(--muted);line-height:1.6;margin-bottom:14px}
+.t-cm{font-size:.77rem;color:var(--green);font-weight:700;margin-bottom:12px}
+.t-btn{display:block;width:100%;padding:10px;text-align:center;background:rgba(99,179,237,.1);color:var(--blue);border:1px solid rgba(99,179,237,.25);border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:var(--font-b);transition:all .2s;text-decoration:none}
+.t-btn:hover{background:rgba(99,179,237,.22);border-color:var(--blue2)}
+
+/* EMAIL */
+.email-sec{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:100px 52px;text-align:center;position:relative;overflow:hidden}
+.eg{position:absolute;top:-100px;left:50%;transform:translateX(-50%);width:500px;height:300px;background:radial-gradient(circle,rgba(245,166,35,.1),transparent 70%);pointer-events:none}
+.ef{display:flex;flex-direction:column;gap:12px;max-width:430px;margin:0 auto 20px;position:relative;z-index:2}
+.inp{background:var(--bg4);border:1px solid var(--border);color:var(--text);padding:13px 18px;border-radius:10px;font-family:var(--font-b);font-size:.9rem;outline:none;transition:border-color .2s;width:100%}
+.inp:focus{border-color:var(--blue2)}
+.inp::placeholder{color:var(--muted2)}
+.inp-err{border-color:var(--red)!important}
+.ferr{font-size:.77rem;color:var(--red);text-align:left;margin-top:-6px}
+
+/* AUTH */
+.auth-pg{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:120px 24px 60px;position:relative}
+.auth-glow{position:absolute;width:400px;height:400px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(99,179,237,.07),transparent 70%);pointer-events:none}
+.auth-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:44px;width:100%;max-width:440px;position:relative;z-index:2;box-shadow:var(--shadow2)}
+.auth-lgo{text-align:center;margin-bottom:28px;font-family:var(--font-h);font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.auth-ttl{font-family:var(--font-h);font-size:1.55rem;font-weight:800;text-align:center;margin-bottom:8px}
+.auth-sub{color:var(--muted);font-size:.87rem;text-align:center;margin-bottom:28px}
+.fg{margin-bottom:16px}
+.fl{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.3px}
+.auth-sw{text-align:center;margin-top:22px;color:var(--muted);font-size:.84rem}
+.auth-sw button{background:none;border:none;color:var(--blue);cursor:pointer;font-weight:600;font-family:var(--font-b);font-size:.84rem}
+.divider{display:flex;align-items:center;gap:14px;margin:18px 0;color:var(--muted2);font-size:.76rem}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* DASHBOARD */
+.dash-pg{min-height:100vh;padding:110px 52px 80px}
+.dash-greet{font-family:var(--font-h);font-size:1.9rem;font-weight:800;margin-bottom:6px}
+.dash-sub2{color:var(--muted);font-size:.88rem;margin-bottom:40px}
+.dash-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
+.ds{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.ds-v{font-family:var(--font-h);font-size:1.75rem;font-weight:800;margin-bottom:4px}
+.ds-l{font-size:.76rem;color:var(--muted)}
+.prog-bar{height:5px;background:var(--bg4);border-radius:3px;margin-top:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--blue2),var(--blue));transition:width 1s ease}
+
+/* BLOG */
+.blog-pg{min-height:100vh;padding:110px 52px 80px}
+.bg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.bc{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .3s;cursor:pointer}
+.bc:hover{transform:translateY(-5px);border-color:var(--border2);box-shadow:var(--shadow2)}
+.bt{height:176px;display:flex;align-items:center;justify-content:center;font-size:3.2rem}
+.bb{padding:22px}
+.bcat{font-size:.69rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:var(--blue);margin-bottom:10px}
+.btitle{font-family:var(--font-h);font-size:1.02rem;font-weight:700;line-height:1.4;margin-bottom:10px}
+.bex{font-size:.81rem;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.bmeta{display:flex;justify-content:space-between;align-items:center}
+.bdate{font-size:.73rem;color:var(--muted2)}
+.bread{font-size:.73rem;color:var(--blue);font-weight:600}
+.post-wrap{max-width:760px;margin:0 auto}
+.post-title{font-family:var(--font-h);font-size:clamp(1.7rem,4vw,2.5rem);font-weight:800;line-height:1.2;margin-bottom:16px}
+.post-body{font-size:.95rem;line-height:1.85;color:#CBD5E0}
+.post-body h2{font-family:var(--font-h);font-size:1.3rem;font-weight:700;margin:30px 0 12px;color:var(--text)}
+.post-body h3{font-family:var(--font-h);font-size:1.08rem;font-weight:700;margin:22px 0 8px;color:var(--text)}
+.post-body p{margin-bottom:16px}
+.post-body ul{padding-left:20px;margin-bottom:16px}
+.post-body li{margin-bottom:7px}
+.post-body a{color:var(--blue);text-decoration:underline}
+.post-body .abox{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);padding:18px 22px;margin:24px 0}
+.post-body .abox strong{display:block;margin-bottom:6px;color:var(--gold)}
+
+/* THANKYOU */
+.ty-pg{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:60px 24px;text-align:center;position:relative}
+.ty-box{max-width:500px;position:relative;z-index:2}
+.ty-icon{font-size:4.5rem;margin-bottom:22px;animation:float 3s ease-in-out infinite;display:block}
+.ty-title{font-family:var(--font-h);font-size:2.3rem;font-weight:800;margin-bottom:12px}
+.ty-sub{color:var(--muted);font-size:1rem;line-height:1.7;margin-bottom:28px}
+.rbar{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:13px 18px;font-size:.83rem;color:var(--muted)}
+.rprog{height:4px;background:var(--bg4);border-radius:2px;margin-top:10px;overflow:hidden}
+.rfill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));background-size:200% 100%;transition:width 60ms linear}
+
+/* MONO */
+.mono-c{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:30px;text-align:center}
+.mono-i{font-size:2.4rem;margin-bottom:14px}
+.mono-c h3{font-family:var(--font-h);font-size:1.08rem;font-weight:700;margin-bottom:10px}
+.mono-c p{font-size:.84rem;color:var(--muted);line-height:1.65}
+.mono-amt{font-family:var(--font-h);font-size:1.5rem;font-weight:800;color:var(--gold);margin:12px 0 4px}
+
+/* TOAST */
+.toast-ctr{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;gap:10px}
+.toast{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px 18px;min-width:250px;max-width:320px;box-shadow:var(--shadow2);display:flex;align-items:flex-start;gap:11px;animation:slideIn .35s cubic-bezier(.34,1.56,.64,1) both}
+.toast.rm{animation:slideOut .3s ease forwards}
+.toast-ico{font-size:1.15rem;margin-top:1px}
+.toast strong{display:block;font-size:.86rem;font-weight:700;margin-bottom:2px}
+.toast span{font-size:.76rem;color:var(--muted)}
+.toast-x{margin-left:auto;background:none;border:none;color:var(--muted2);cursor:pointer;font-size:1.1rem;padding:0 0 0 6px;line-height:1}
+
+/* FOOTER */
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:60px 52px 30px}
+.fg-grid{display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.f-logo{font-family:var(--font-h);font-size:1.4rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px}
+.f-desc{font-size:.84rem;color:var(--muted);line-height:1.7;max-width:240px}
+.f-col h4{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--blue);margin-bottom:16px}
+.f-col ul{list-style:none}
+.f-col ul li{margin-bottom:10px}
+.f-col ul a,.f-col ul button{color:var(--muted);font-size:.84rem;text-decoration:none;background:none;border:none;cursor:pointer;font-family:var(--font-b);transition:color .2s;padding:0;text-align:left}
+.f-col ul a:hover,.f-col ul button:hover{color:var(--gold)}
+.f-bot{display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid var(--border);flex-wrap:wrap;gap:10px}
+.f-bot p{font-size:.76rem;color:var(--muted2)}
+.c-item{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);margin-bottom:8px}
+
+/* LOADING */
+.load-scr{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:16px}
+.spinner{width:22px;height:22px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+.spinner-lg{width:36px;height:36px;border-width:3px;border-top-color:var(--gold)}
+.load-logo{font-family:var(--font-h);font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.back-btn{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:.84rem;cursor:pointer;background:none;border:none;font-family:var(--font-b);margin-bottom:26px;transition:color .2s;padding:0}
+.back-btn:hover{color:var(--blue)}
+.err-box{background:rgba(252,129,129,.1);border:1px solid rgba(252,129,129,.3);border-radius:8px;padding:12px 16px;font-size:.82rem;color:var(--red);margin-bottom:14px}
+.tc{text-align:center}.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mb16{margin-bottom:16px}.mb24{margin-bottom:24px}
+.flex{display:flex}.aic{align-items:center}.g8{gap:8px}.g12{gap:12px}.g16{gap:16px}.wfull{width:100%}.jcc{justify-content:center}
+
+@media(max-width:900px){
+  .nav{padding:0 22px}.nav-links{display:none}.hamburger{display:flex}
+  .hero{padding:120px 22px 80px}.sec{padding:68px 22px}.email-sec{padding:68px 22px}
+  .g3,.g4{grid-template-columns:1fr}.g2{grid-template-columns:1fr}
+  .fg-grid{grid-template-columns:1fr 1fr;gap:28px}
+  .dash-stats{grid-template-columns:repeat(2,1fr)}
+  .dash-pg,.blog-pg{padding:100px 22px 60px}
+  .bg-grid{grid-template-columns:1fr}.hero-stats{gap:24px}
+  .auth-box{padding:30px 22px}.footer{padding:50px 22px 26px}
+}
+@media(max-width:480px){.fg-grid{grid-template-columns:1fr}.dash-stats{grid-template-columns:1fr 1fr}.hero-btns{flex-direction:column}.btn{width:100%;justify-content:center}}
+</style>
+</head>
+<body>
+<div id="root">
+  <div class="load-scr"><div class="spinner spinner-lg"></div><div class="load-logo">WealthMind</div></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+
+<script>
+/* ── FIREBASE DEMO SHIM ──
+   Replace the config below with your real Firebase config from:
+   console.firebase.google.com → Project Settings → Web App
+   ─────────────────────────────────────────────────────────── */
+const FIREBASE_CONFIG = {
+  // apiKey: "YOUR_API_KEY",
+  // authDomain: "YOUR_PROJECT.firebaseapp.com",
+  // projectId: "YOUR_PROJECT_ID",
+  // storageBucket: "YOUR_PROJECT.appspot.com",
+  // messagingSenderId: "YOUR_MSG_ID",
+  // appId: "YOUR_APP_ID"
+};
+
+/* ── AFFILIATE LINKS ── */
+const AL = {
+  jasper:     "https://www.jasper.ai/?fpr=wealthmind",
+  copy_ai:    "https://www.copy.ai/?via=wealthmind",
+  canva:      "https://www.canva.com/affiliates/wealthmind",
+  fiverr:     "https://track.fiverr.com/visit/?bta=0&nci=8080&campaign=wealthmind",
+  shopify:    "https://www.shopify.com/?ref=wealthmind",
+  convertkit: "https://convertkit.com/?lmref=wealthmind",
+  semrush:    "https://www.semrush.com/partner/wealthmind/",
+  teachable:  "https://teachable.com/?ref=wealthmind",
+  bluehost:   "https://www.bluehost.com/track/wealthmind/",
+  clickbank:  "https://accounts.clickbank.com/signup/?ref=wealthmind",
+  kit:        "https://gumroad.com/?ref=wealthmind"
+};
+
+/* ── TOOLS DATA ── */
+const TOOLS = [
+  {id:1,em:"🤖",nm:"Jasper AI",tag:"AI Writing",tc:"rgba(99,179,237,.15)",tt:"#63B3ED",ds:"World's best AI writing tool. Write blogs, ad copy & marketing content in minutes with powerful AI.",cm:"💰 30% recurring commission",lk:AL.jasper},
+  {id:2,em:"✍️",nm:"Copy.ai",tag:"Copywriting",tc:"rgba(159,122,234,.15)",tt:"#9F7AEA",ds:"Generate high-converting sales copy, emails, and marketing content instantly — with a generous free tier.",cm:"💰 45% commission on paid plans",lk:AL.copy_ai},
+  {id:3,em:"🎨",nm:"Canva Pro",tag:"Design",tc:"rgba(248,113,113,.15)",tt:"#F87171",ds:"Design stunning graphics, social posts, digital products and presentations — zero design skills needed.",cm:"💰 $36 per Pro signup",lk:AL.canva},
+  {id:4,em:"💼",nm:"Fiverr",tag:"Freelance",tc:"rgba(52,211,153,.15)",tt:"#34D399",ds:"Sell any digital service globally. Free profile, built-in audience. Clients come to you — just show up.",cm:"💰 $15–$150 per referred seller",lk:AL.fiverr},
+  {id:5,em:"🛒",nm:"Shopify",tag:"eCommerce",tc:"rgba(245,166,35,.15)",tt:"#F5A623",ds:"Launch your online store and sell physical or digital products with the world's #1 commerce platform.",cm:"💰 $150 per merchant referral",lk:AL.shopify},
+  {id:6,em:"📧",nm:"ConvertKit",tag:"Email",tc:"rgba(251,146,60,.15)",tt:"#FB923C",ds:"Build and monetize your email list from day one. Automate newsletters and sell digital products with ease.",cm:"💰 30% recurring for 24 months",lk:AL.convertkit},
+  {id:7,em:"🔍",nm:"SEMrush",tag:"SEO",tc:"rgba(96,165,250,.15)",tt:"#60A5FA",ds:"Dominate Google rankings with keyword research, competitor analysis, backlink audits and site optimization.",cm:"💰 $200 per sale",lk:AL.semrush},
+  {id:8,em:"🎓",nm:"Teachable",tag:"Courses",tc:"rgba(167,243,208,.15)",tt:"#6EE7B7",ds:"Create and sell online courses on any topic. Turn your expertise into a 24/7 income stream that runs itself.",cm:"💰 30% recurring commission",lk:AL.teachable},
+];
+
+/* ── BLOG POSTS ── */
+const POSTS = [
+  {
+    id:1,cat:"AI Tools",title:"Top AI Tools to Make Money Online in 2026",
+    ex:"A curated list of the most profitable AI tools you can use — and promote as an affiliate — to start earning passive income this month.",
+    em:"🤖",bg:"linear-gradient(135deg,#0f2027,#203a43,#2c5364)",dt:"April 2, 2026",rt:"8 min read",
+    body:`<h2>Why AI Tools Are the #1 Income Opportunity Right Now</h2>
+<p>Artificial intelligence has flipped the script on who can earn money online. You no longer need to be a developer or designer to build income streams. AI tools do the heavy lifting — and every person who signs up through your affiliate link pays you month after month.</p>
+<h2>1. Jasper AI — Best for Bloggers & Marketers</h2>
+<p>Jasper is the gold standard for AI writing. It helps content creators write blog posts 10x faster and produces entire marketing campaigns in minutes.</p>
+<div class="abox"><strong>💰 Affiliate Opportunity</strong>Jasper pays 30% recurring commissions. 100 referrals on the $49/mo plan = ~$1,500/month passive income every single month.<br><br><a href="${AL.jasper}" target="_blank">→ Try Jasper AI Free + Get Your Affiliate Link</a></div>
+<h2>2. Copy.ai — Best Free Starting Point</h2>
+<p>Copy.ai has a generous free tier, making it easier to refer users. It writes sales copy, email sequences, product descriptions, and social captions in seconds.</p>
+<div class="abox"><strong>💰 Affiliate Opportunity</strong>45% commission on paid plans — one of the highest rates in the industry.<br><br><a href="${AL.copy_ai}" target="_blank">→ Get Copy.ai Free + Affiliate Access</a></div>
+<h2>3. Canva Pro — Design Without Skills</h2>
+<p>Canva lets anyone create professional graphics, YouTube thumbnails, social posts, eBook covers, and presentations. Perfect for digital product sellers.</p>
+<div class="abox"><strong>💰 Affiliate Opportunity</strong>Earn $36 for every Pro subscriber you refer. With 100M+ users, Canva practically sells itself.<br><br><a href="${AL.canva}" target="_blank">→ Get Canva Pro + Affiliate Link</a></div>
+<h2>How to Get Started Today</h2>
+<ul><li>Pick 2–3 tools from this list that you personally use or test</li><li>Sign up for their affiliate programs (all are free to join)</li><li>Write honest review articles or comparison posts about them</li><li>Add your links naturally inside content and social posts</li><li>Collect commissions every month — passive income that compounds</li></ul>`
+  },
+  {
+    id:2,cat:"Beginner Guide",title:"How Beginners Can Earn Their First $100 Online",
+    ex:"A clear, honest roadmap to making your first $100 online — no experience, no capital, no gatekeeping. Just real steps that work.",
+    em:"💵",bg:"linear-gradient(135deg,#134e5e,#71b280)",dt:"March 28, 2026",rt:"10 min read",
+    body:`<h2>The Truth About Your First $100 Online</h2>
+<p>Your first $100 online isn't about a magic system. It's about taking one simple, imperfect action consistently. Most people overthink and never start. Let's fix that today.</p>
+<h2>Path 1: Freelancing (Fastest — 1–2 Weeks)</h2>
+<p>Freelancing is the most reliable way for a beginner to earn their first $100. You exchange a skill for money. Skills that earn $5–$50 per task:</p>
+<ul><li>Writing social media captions</li><li>Data entry and research</li><li>Canva graphic design</li><li>Transcription (listen and type)</li><li>AI prompt writing and editing</li></ul>
+<div class="abox"><strong>🚀 Start on Fiverr Today</strong>Create a free Fiverr profile and offer one service. Your first client could come within 48 hours.<br><br><a href="${AL.fiverr}" target="_blank">→ Create Your Free Fiverr Profile Now</a></div>
+<h2>Path 2: Affiliate Marketing (2–8 Weeks)</h2>
+<p>Write one honest review article about tools you've used. Add affiliate links. Share it in Facebook groups, Reddit, or WhatsApp. When someone clicks and buys — you earn.</p>
+<h2>Path 3: Digital Products (1–4 Weeks)</h2>
+<p>Create a simple PDF on something you know: budgeting tips, recipes, study notes. Sell for $5–$15 on <a href="${AL.clickbank}" target="_blank">Gumroad or Selar</a>. Promote in WhatsApp groups.</p>
+<h2>Your 7-Day Action Plan</h2>
+<ul><li><strong>Day 1–2:</strong> Create accounts on Fiverr + 1 affiliate platform</li><li><strong>Day 3–4:</strong> Write your first gig description or blog post</li><li><strong>Day 5–6:</strong> Share in 5 relevant online communities</li><li><strong>Day 7:</strong> Follow up, respond to messages, improve your listing</li></ul>
+<p>$100 is closer than you think. The only variable is whether you start today.</p>`
+  },
+  {
+    id:3,cat:"Affiliate Marketing",title:"Affiliate Marketing Made Simple: Your Complete 2026 Guide",
+    ex:"Everything you need to know to start earning affiliate commissions — how the model works, the best programs, and how to drive traffic.",
+    em:"🔗",bg:"linear-gradient(135deg,#1a1a2e,#16213e,#0f3460)",dt:"March 20, 2026",rt:"12 min read",
+    body:`<h2>What Is Affiliate Marketing?</h2>
+<p>Affiliate marketing: you recommend products, and when someone buys through your special link, you get paid a commission. No inventory, no customer service, no shipping. Just send traffic and collect commissions.</p>
+<h2>Real Earning Benchmarks</h2>
+<ul><li><strong>Beginners (0–6 months):</strong> $0–$500/month</li><li><strong>Intermediate (6–18 months):</strong> $500–$5,000/month</li><li><strong>Advanced (18+ months):</strong> $5,000–$50,000+/month</li></ul>
+<h2>Step 1: Pick Your Niche</h2>
+<p>Most profitable niches in 2026:</p>
+<ul><li><strong>AI Tools</strong> — 20–45% recurring commissions</li><li><strong>Personal Finance</strong> — $50–$200 per lead</li><li><strong>Online Business Tools</strong> — $100–$500 per sale</li><li><strong>Health & Fitness Apps</strong> — 20–30% recurring</li></ul>
+<h2>Step 2: Best Affiliate Programs to Join Now</h2>
+<div class="abox"><strong>💰 Top Programs — All Free to Join</strong><br><br>
+<a href="${AL.semrush}" target="_blank">SEMrush — $200 per sale</a><br>
+<a href="${AL.shopify}" target="_blank">Shopify — $150 per merchant</a><br>
+<a href="${AL.convertkit}" target="_blank">ConvertKit — 30% recurring (24 months)</a><br>
+<a href="${AL.bluehost}" target="_blank">Bluehost — $65–$150 per hosting sale</a></div>
+<h2>Step 3: Create Content That Converts</h2>
+<ul><li>"Best X for Y" articles — "Best AI tools for students"</li><li>Comparisons — "Tool A vs Tool B: Which is Better?"</li><li>Honest reviews with real screenshots and personal experience</li><li>Tutorials — "How to use [Tool] to achieve [result]"</li></ul>
+<h2>The Golden Rule</h2>
+<p>Only promote tools you would genuinely recommend to a friend. Your audience's trust is worth more than any single commission. Be honest, be helpful, and the income follows naturally.</p>`
+  }
+];
+
+/* ═══════════════════════════════════════════════════
+   REACT APP
+═══════════════════════════════════════════════════ */
+const {useState,useEffect,useCallback,useRef} = React;
+
+/* ── LOCAL AUTH STORE (replaces Firebase in demo mode) ── */
+const LOCAL_USERS_KEY = 'wm_users_v1';
+const LOCAL_SESSION_KEY = 'wm_session_v1';
+const LOCAL_LEADS_KEY = 'wm_leads_v1';
+
+function getLocalUsers(){try{return JSON.parse(localStorage.getItem(LOCAL_USERS_KEY)||'[]')}catch{return[]}}
+function saveLocalUser(u){const us=getLocalUsers();if(!us.find(x=>x.email===u.email)){us.push(u);localStorage.setItem(LOCAL_USERS_KEY,JSON.stringify(us));return true}return false}
+function checkLocalUser(email,pw){return getLocalUsers().find(u=>u.email===email&&u.pw===pw)||null}
+function saveSession(user){localStorage.setItem(LOCAL_SESSION_KEY,JSON.stringify(user))}
+function getSession(){try{return JSON.parse(localStorage.getItem(LOCAL_SESSION_KEY))}catch{return null}}
+function clearSession(){localStorage.removeItem(LOCAL_SESSION_KEY)}
+function saveLead(name,email){const ls=JSON.parse(localStorage.getItem(LOCAL_LEADS_KEY)||'[]');ls.push({name,email,ts:Date.now()});localStorage.setItem(LOCAL_LEADS_KEY,JSON.stringify(ls))}
+
+/* ── TOAST HOOK ── */
+function useToast(){
+  const [toasts,setToasts]=useState([]);
+  const add=useCallback((ico,title,msg)=>{
+    const id=Date.now()+Math.random();
+    setToasts(t=>[...t,{id,ico,title,msg}]);
+    setTimeout(()=>{setToasts(t=>t.map(x=>x.id===id?{...x,rm:true}:x));setTimeout(()=>setToasts(t=>t.filter(x=>x.id!==id)),350);},4200);
+  },[]);
+  const rm=useCallback(id=>{setToasts(t=>t.map(x=>x.id===id?{...x,rm:true}:x));setTimeout(()=>setToasts(t=>t.filter(x=>x.id!==id)),350);},[]);
+  return{toasts,add,rm};
+}
+
+/* ── SCROLL HOOK ── */
+function useScrolled(){
+  const [sc,setSc]=useState(false);
+  useEffect(()=>{const fn=()=>setSc(window.scrollY>40);window.addEventListener('scroll',fn);return()=>window.removeEventListener('scroll',fn);},[]);
+  return sc;
+}
+
+/* ─────────────────────────────
+   COMPONENTS
+───────────────────────────── */
+
+function Toasts({toasts,rm}){
+  return React.createElement('div',{className:'toast-ctr'},
+    toasts.map(t=>React.createElement('div',{key:t.id,className:`toast${t.rm?' rm':''}`},
+      React.createElement('span',{className:'toast-ico'},t.ico),
+      React.createElement('div',null,React.createElement('strong',null,t.title),React.createElement('span',null,t.msg)),
+      React.createElement('button',{className:'toast-x',onClick:()=>rm(t.id)},'×')
+    ))
+  );
+}
+
+function Sp({lg}){return React.createElement('div',{className:`spinner${lg?' spinner-lg':''}`});}
+
+/* ── NAVBAR ── */
+function Nav({pg,go,user,logout,add}){
+  const sc=useScrolled();
+  const [mob,setMob]=useState(false);
+  const nav=(p)=>{go(p);setMob(false);window.scrollTo({top:0,behavior:'smooth'});};
+  const links=[['Home','home'],['How It Works','how'],['Income Streams','income'],['Tools','tools'],['Blog','blog']];
+  return React.createElement(React.Fragment,null,
+    React.createElement('nav',{className:`nav${sc?' sc':''}`},
+      React.createElement('div',{className:'nav-logo',onClick:()=>nav('home')},'Wealth',React.createElement('em',null,'Mind')),
+      React.createElement('div',{className:'nav-links'},
+        links.map(([l,p])=>React.createElement('button',{key:p,className:`nl${pg===p?' act':''}`,onClick:()=>nav(p)},l)),
+        user
+          ?React.createElement(React.Fragment,null,
+              React.createElement('button',{className:'nl',onClick:()=>nav('dashboard')},'📊 Dashboard'),
+              React.createElement('button',{className:'nb nb-g',onClick:()=>{logout();add('👋','Signed out','See you again soon!');}},'\u2192 Sign Out')
+            )
+          :React.createElement(React.Fragment,null,
+              React.createElement('button',{className:'nb nb-g',onClick:()=>nav('login')},'Login'),
+              React.createElement('button',{className:'nb nb-p',onClick:()=>nav('signup')},'Sign Up Free')
+            )
+      ),
+      React.createElement('button',{className:'hamburger',onClick:()=>setMob(o=>!o)},
+        React.createElement('span'),React.createElement('span'),React.createElement('span')
+      )
+    ),
+    React.createElement('div',{className:`mob-menu${mob?' open':''}`},
+      links.map(([l,p])=>React.createElement('button',{key:p,className:'ml',onClick:()=>nav(p)},l)),
+      user
+        ?React.createElement(React.Fragment,null,
+            React.createElement('button',{className:'ml',onClick:()=>nav('dashboard')},'📊 Dashboard'),
+            React.createElement('button',{className:'ml',onClick:()=>{logout();setMob(false);}},'Sign Out')
+          )
+        :React.createElement(React.Fragment,null,
+            React.createElement('button',{className:'ml',onClick:()=>nav('login')},'Login'),
+            React.createElement('button',{className:'ml',onClick:()=>nav('signup')},'Sign Up Free')
+          )
+    )
+  );
+}
+
+/* ── HOME ── */
+function Home({go,add}){
+  return React.createElement('div',null,
+    /* HERO */
+    React.createElement('section',{className:'hero'},
+      React.createElement('div',{className:'hg1'}),React.createElement('div',{className:'hg2'}),React.createElement('div',{className:'hgrid'}),
+      React.createElement('div',{className:'hero-c'},
+        React.createElement('div',{className:'badge'},React.createElement('div',{className:'bdot'}),'🔥 #1 Platform for Online Income in 2026'),
+        React.createElement('h1',null,'Turn Your Knowledge Into ',React.createElement('span',{className:'tg'},'Real Income'),React.createElement('br'),React.createElement('span',{className:'tb'},'Online')),
+        React.createElement('p',{className:'hero-sub'},'Discover simple, proven ways anyone — students, workers, complete beginners — can earn online using AI tools and digital skills. No experience required.'),
+        React.createElement('div',{className:'hero-btns'},
+          React.createElement('button',{className:'btn btn-gld',onClick:()=>go('signup')},'🚀 Get Started Free'),
+          React.createElement('button',{className:'btn btn-out',onClick:()=>go('tools')},'🛠 Explore Tools')
+        ),
+        React.createElement('div',{className:'hero-stats'},
+          React.createElement('div',null,React.createElement('div',{className:'sn'},'$9.1K'),React.createElement('div',{className:'sl'},'Avg monthly earnings\ntop creators achieve')),
+          React.createElement('div',null,React.createElement('div',{className:'sn'},'4 Ways'),React.createElement('div',{className:'sl'},'To earn online\nwe teach all of them')),
+          React.createElement('div',null,React.createElement('div',{className:'sn'},'6–18mo'),React.createElement('div',{className:'sl'},'Realistic timeline\nto full-time income'))
+        )
+      )
+    ),
+    /* HOW IT WORKS */
+    React.createElement('section',{className:'sec sec-alt',id:'how'},
+      React.createElement('div',{className:'sec-lbl'},'The Blueprint'),
+      React.createElement('h2',{className:'sec-title'},'How It ',React.createElement('span',{className:'tb'},'Actually Works')),
+      React.createElement('p',{className:'sec-sub'},'Three simple steps. No experience needed. No upfront investment. Just consistent action.'),
+      React.createElement('div',{className:'g3'},
+        [
+          {em:'📚',t:'Learn a Simple Skill',d:'Pick one skill in demand — AI writing, design, content creation, or affiliate marketing. We guide you with clear, beginner-friendly resources.'},
+          {em:'🛠',t:'Use Recommended Tools',d:'We hand-pick the best AI tools and platforms. Each one has an affiliate program so you earn from recommending them too.'},
+          {em:'💸',t:'Start Earning Online',d:'Through freelancing, content creation, affiliate commissions, or digital products — your income grows with every piece of work you put out.'},
+        ].map((s,i)=>React.createElement('div',{key:i,className:'card'},
+          React.createElement('div',{className:'step-n'},`0${i+1}`),
+          React.createElement('div',{className:'ci'},s.em),
+          React.createElement('h3',null,s.t),
+          React.createElement('p',null,s.d)
+        ))
+      )
+    ),
+    /* INCOME STREAMS */
+    React.createElement('section',{className:'sec',id:'income'},
+      React.createElement('div',{className:'sec-lbl'},'Income Channels'),
+      React.createElement('h2',{className:'sec-title'},'4 Ways to ',React.createElement('span',{className:'tg'},'Earn Online')),
+      React.createElement('p',{className:'sec-sub'},'Pick one income stream and go deep. Once it\'s working, add the others. Most successful earners stack 2–3.'),
+      React.createElement('div',{className:'g2'},
+        [
+          {em:'💼',t:'Freelancing',d:'Sell any skill — writing, design, data entry — on Fiverr or Upwork. No experience needed to create a profile and get your first client.',earn:'$200–$5,000/mo',c:'rgba(245,166,35,.18)',ct:'var(--gold)',cls:'sl-1',lk:AL.fiverr},
+          {em:'🤝',t:'Affiliate Marketing',d:'Recommend tools through special links. Earn 20–45% recurring commission every month your referrals stay subscribed. Pure passive income.',earn:'$500–$10,000/mo',c:'rgba(99,179,237,.15)',ct:'var(--blue)',cls:'sl-2',lk:AL.semrush},
+          {em:'📦',t:'Digital Products',d:'Create once, sell forever. eBooks, templates, courses, and planners earn near-100% profit margins with zero shipping or inventory.',earn:'$300–$8,000/mo',c:'rgba(159,122,234,.15)',ct:'#9F7AEA',cls:'sl-3',lk:AL.teachable},
+          {em:'📱',t:'Content Creation',d:'Grow an audience on YouTube, TikTok, or a blog. Monetize with ads, sponsorships, and affiliate links. One viral post can change your trajectory.',earn:'$100–$15,000/mo',c:'rgba(72,187,120,.15)',ct:'var(--green)',cls:'sl-4',lk:AL.jasper},
+        ].map((s,i)=>React.createElement('div',{key:i,className:`card ${s.cls}`,style:{padding:'28px'}},
+          React.createElement('span',{className:'earn-b',style:{background:s.c,color:s.ct}},s.earn),
+          React.createElement('div',{className:'ci'},s.em),
+          React.createElement('h3',null,s.t),
+          React.createElement('p',{style:{marginBottom:'20px'}},s.d),
+          React.createElement('a',{href:s.lk,target:'_blank',rel:'noopener noreferrer',className:'btn btn-sm btn-out',style:{display:'inline-flex'}},'Start Now →')
+        ))
+      )
+    ),
+    /* TOOLS PREVIEW */
+    React.createElement('section',{className:'sec sec-alt'},
+      React.createElement('div',{className:'sec-lbl'},'Recommended Tools'),
+      React.createElement('h2',{className:'sec-title'},'Earn With These ',React.createElement('span',{className:'tg'},'Proven Tools')),
+      React.createElement('p',{className:'sec-sub'},'These tools all have free affiliate programs. Use them, review them, earn commissions every month.'),
+      React.createElement('div',{className:'g4'},TOOLS.slice(0,4).map(t=>React.createElement(ToolCard,{key:t.id,t,add}))),
+      React.createElement('div',{className:'tc mt24'},React.createElement('button',{className:'btn btn-out',onClick:()=>go('tools')},'View All 8 Tools →'))
+    ),
+    /* EMAIL CAPTURE */
+    React.createElement(EmailSection,{go,add}),
+    /* MONETIZATION */
+    React.createElement(MonoSection)
+  );
+}
+
+/* ── TOOL CARD ── */
+function ToolCard({t,add}){
+  const click=()=>{add('🚀',`Opening ${t.nm}`,'Link opening in a new tab...');window.open(t.lk,'_blank','noopener,noreferrer');};
+  return React.createElement('div',{className:'tc'},
+    React.createElement('div',{style:{fontSize:'2rem',marginBottom:'10px'}},t.em),
+    React.createElement('div',{className:'tc-hdr'},
+      React.createElement('div',{className:'t-nm'},t.nm),
+      React.createElement('span',{className:'t-tag',style:{background:t.tc,color:t.tt}},t.tag)
+    ),
+    React.createElement('p',{className:'t-ds'},t.ds),
+    React.createElement('div',{className:'t-cm'},t.cm),
+    React.createElement('button',{className:'t-btn',onClick:click},'🔗 Get Access →')
+  );
+}
+
+/* ── EMAIL CAPTURE ── */
+function EmailSection({go,add}){
+  const [nm,setNm]=useState('');
+  const [em,setEm]=useState('');
+  const [err,setErr]=useState('');
+  const [ld,setLd]=useState(false);
+  const submit=async()=>{
+    if(!em||!em.includes('@')||!em.includes('.')){setErr('Please enter a valid email address');return;}
+    setLd(true);setErr('');
+    try{
+      saveLead(nm,em);
+      add('🎉','Email saved!','Your starter kit is on the way!');
+      setNm('');setEm('');
+      go('thankyou');
+    }catch(e){setErr('Something went wrong. Try again.');}
+    finally{setLd(false);}
+  };
+  return React.createElement('section',{className:'email-sec',id:'newsletter'},
+    React.createElement('div',{className:'eg'}),
+    React.createElement('div',{className:'sec-lbl tc',style:{justifyContent:'center',display:'flex'}},'Free Resource'),
+    React.createElement('h2',{className:'sec-title tc',style:{marginBottom:'10px'}},'Get Your ',React.createElement('span',{className:'tg'},'Free Starter Kit')),
+    React.createElement('p',{className:'sec-sub tc',style:{margin:'0 auto 36px',textAlign:'center'}},'The exact tools, niches, and content templates making people $3K–$15K/month. Used by 12,000+ earners.'),
+    React.createElement('div',{className:'ef'},
+      React.createElement('input',{className:'inp',type:'text',placeholder:'Your first name (optional)',value:nm,onChange:e=>setNm(e.target.value)}),
+      React.createElement('input',{className:`inp${err?' inp-err':''}`,type:'email',placeholder:'Your email address *',value:em,onChange:e=>{setEm(e.target.value);setErr('');}}),
+      err&&React.createElement('div',{className:'ferr'},err),
+      React.createElement('button',{className:'btn btn-gld wfull',style:{justifyContent:'center'},onClick:submit,disabled:ld},ld?React.createElement(Sp):'\uD83D\uDCE9 Get Access Now')
+    ),
+    React.createElement('div',{className:'flex aic g16',style:{justifyContent:'center',flexWrap:'wrap'}},
+      ['✓ Free forever','✓ No spam','✓ Unsubscribe anytime'].map(t=>React.createElement('span',{key:t,style:{fontSize:'.76rem',color:'var(--muted)'}},t))
+    )
+  );
+}
+
+/* ── MONETIZATION ── */
+function MonoSection(){
+  return React.createElement('section',{className:'sec'},
+    React.createElement('div',{className:'sec-lbl'},'Full Transparency'),
+    React.createElement('h2',{className:'sec-title'},'How ',React.createElement('span',{className:'tb'},'WealthMind Earns'),' — And How You Can Too'),
+    React.createElement('p',{className:'sec-sub'},'We believe in complete transparency. Here\'s exactly how this platform makes money — and how you can replicate the same model.'),
+    React.createElement('div',{className:'g3'},
+      [
+        {i:'🔗',t:'Affiliate Links',a:'$500–$8,000/mo',d:'Every tool link on this site may be an affiliate link. When you click and buy, we earn a commission at no extra cost to you. This funds our free content.'},
+        {i:'📧',t:'Email List',a:'$0.01–$2 per subscriber/mo',d:'Every email collected becomes a long-term relationship. We send value, educational content, and occasional curated offers — never spam.'},
+        {i:'📦',t:'Digital Products',a:'$20–$500 per product',d:'eBooks, templates, and mini-courses. Near-100% profit margins. Create once, sell forever. Anyone can copy this model.'},
+      ].map((m,i)=>React.createElement('div',{key:i,className:'mono-c'},
+        React.createElement('div',{className:'mono-i'},m.i),
+        React.createElement('h3',null,m.t),
+        React.createElement('div',{className:'mono-amt'},m.a),
+        React.createElement('p',null,m.d)
+      ))
+    )
+  );
+}
+
+/* ── HOW PAGE ── */
+function HowPage({go}){
+  return React.createElement('div',{style:{paddingTop:'68px'}},
+    React.createElement('section',{className:'sec sec-alt'},
+      React.createElement('div',{className:'sec-lbl'},'The Blueprint'),
+      React.createElement('h2',{className:'sec-title'},'How It ',React.createElement('span',{className:'tb'},'Works')),
+      React.createElement('p',{className:'sec-sub'},'A clear 3-step system that anyone can follow to build real online income.'),
+      React.createElement('div',{className:'g3'},
+        [
+          {em:'📚',t:'Learn a Simple Skill',d:'Pick one skill in demand — AI writing, design, content creation, or affiliate marketing. You don\'t need years of experience — you need 1 focused skill.'},
+          {em:'🛠',t:'Use the Right Tools',d:'The right tool multiplies your output. We curate only tools with proven affiliate programs, so you earn while using them.'},
+          {em:'💸',t:'Earn Through Multiple Channels',d:'Freelancing, affiliate commissions, digital product sales, or content monetization — you build multiple income streams over time.'},
+        ].map((s,i)=>React.createElement('div',{key:i,className:'card'},
+          React.createElement('div',{className:'step-n'},`0${i+1}`),
+          React.createElement('div',{className:'ci'},s.em),
+          React.createElement('h3',null,s.t),
+          React.createElement('p',null,s.d)
+        ))
+      )
+    ),
+    React.createElement('section',{className:'sec tc'},
+      React.createElement('h2',{className:'sec-title'},'Ready to ',React.createElement('span',{className:'tg'},'Start?')),
+      React.createElement('p',{className:'sec-sub',style:{margin:'0 auto 32px',textAlign:'center'}},'Join thousands already building income online.'),
+      React.createElement('div',{className:'flex aic g12',style:{justifyContent:'center',flexWrap:'wrap'}},
+        React.createElement('button',{className:'btn btn-gld',onClick:()=>go('signup')},'🚀 Sign Up Free'),
+        React.createElement('button',{className:'btn btn-out',onClick:()=>go('tools')},'🛠 Browse Tools')
+      )
+    )
+  );
+}
+
+/* ── INCOME PAGE ── */
+function IncomePage({go,add}){
+  return React.createElement('div',{style:{paddingTop:'68px'}},
+    React.createElement('section',{className:'sec'},
+      React.createElement('div',{className:'sec-lbl'},'Income Channels'),
+      React.createElement('h2',{className:'sec-title'},'4 Proven Ways to ',React.createElement('span',{className:'tg'},'Earn Online')),
+      React.createElement('p',{className:'sec-sub'},'Every income stream here is real, tested, and accessible to anyone starting from zero.'),
+      React.createElement('div',{className:'g2'},
+        [
+          {em:'💼',t:'Freelancing',d:'Sell any skill on Fiverr, Upwork, or LinkedIn. Writing, design, data entry, video editing, translation — demand is unlimited. Set your own rates and work from anywhere.',earn:'$200–$5,000/mo',c:'rgba(245,166,35,.18)',ct:'var(--gold)',cls:'sl-1',lk:AL.fiverr},
+          {em:'🤝',t:'Affiliate Marketing',d:'The highest passive income potential. Recommend tools through trackable links. Earn 20–45% recurring commission. Build it once and it pays you for years.',earn:'$500–$10,000/mo',c:'rgba(99,179,237,.15)',ct:'var(--blue)',cls:'sl-2',lk:AL.semrush},
+          {em:'📦',t:'Digital Products',d:'Create an eBook, template, or short course on any topic you know. List it on Gumroad or Selar. Near-100% profit margin with zero physical inventory.',earn:'$300–$8,000/mo',c:'rgba(159,122,234,.15)',ct:'#9F7AEA',cls:'sl-3',lk:AL.teachable},
+          {em:'📱',t:'Content Creation',d:'Grow a YouTube channel, TikTok, or blog in any niche you enjoy. Monetize with AdSense, sponsorships, affiliate links, and digital product sales.',earn:'$100–$15,000/mo',c:'rgba(72,187,120,.15)',ct:'var(--green)',cls:'sl-4',lk:AL.jasper},
+        ].map((s,i)=>React.createElement('div',{key:i,className:`card ${s.cls}`,style:{padding:'28px'}},
+          React.createElement('span',{className:'earn-b',style:{background:s.c,color:s.ct}},s.earn),
+          React.createElement('div',{className:'ci'},s.em),
+          React.createElement('h3',null,s.t),
+          React.createElement('p',{style:{marginBottom:'20px'}},s.d),
+          React.createElement('a',{href:s.lk,target:'_blank',rel:'noopener noreferrer',className:'btn btn-sm btn-out',style:{display:'inline-flex'}},'Start Now →')
+        ))
+      )
+    ),
+    React.createElement(MonoSection)
+  );
+}
+
+/* ── TOOLS PAGE ── */
+function ToolsPage({add}){
+  const [filter,setFilter]=useState('All');
+  const tags=['All','AI Writing','Copywriting','Design','Freelance','eCommerce','Email','SEO','Courses'];
+  const filtered=filter==='All'?TOOLS:TOOLS.filter(t=>t.tag===filter);
+  return React.createElement('div',{className:'sec',style:{paddingTop:'110px',minHeight:'100vh'}},
+    React.createElement('div',{className:'sec-lbl'},'Affiliate Tools'),
+    React.createElement('h2',{className:'sec-title'},'Top ',React.createElement('span',{className:'tg'},'Money-Making'),' Tools'),
+    React.createElement('p',{className:'sec-sub'},'Every tool below has a free affiliate program. Use them yourself, then earn commissions recommending them.'),
+    React.createElement('div',{className:'flex aic g8',style:{flexWrap:'wrap',marginBottom:'36px'}},
+      tags.map(tag=>React.createElement('button',{
+        key:tag,onClick:()=>setFilter(tag),className:'btn btn-xs',
+        style:{background:filter===tag?'rgba(99,179,237,.2)':'var(--bg3)',color:filter===tag?'var(--blue)':'var(--muted)',border:`1px solid ${filter===tag?'rgba(99,179,237,.4)':'var(--border)'}`}
+      },tag))
+    ),
+    React.createElement('div',{className:'g4'},filtered.map(t=>React.createElement(ToolCard,{key:t.id,t,add}))),
+    React.createElement('div',{className:'card mt24',style:{textAlign:'center',padding:'36px',maxWidth:'560px',margin:'28px auto 0'}},
+      React.createElement('div',{style:{fontSize:'1.8rem',marginBottom:'10px'}},'💰'),
+      React.createElement('h3',{style:{marginBottom:'10px'}},'How Affiliate Links Work'),
+      React.createElement('p',{style:{color:'var(--muted)',fontSize:'.85rem',lineHeight:'1.7'}},'When you click "Get Access" and sign up or purchase, we may earn a commission at no extra cost to you. We only recommend tools we believe in. Affiliate disclosure is always shown in our footer.')
+    )
+  );
+}
+
+/* ── BLOG PAGE ── */
+function BlogPage({go,setPost}){
+  return React.createElement('div',{className:'blog-pg'},
+    React.createElement('div',{className:'sec-lbl'},'WealthMind Blog'),
+    React.createElement('h2',{className:'sec-title',style:{marginBottom:'10px'}},'Learn to ',React.createElement('span',{className:'tg'},'Earn More')),
+    React.createElement('p',{className:'sec-sub'},'Actionable guides, tool reviews, and income strategies — published weekly.'),
+    React.createElement('div',{className:'bg-grid'},
+      POSTS.map(p=>React.createElement('div',{key:p.id,className:'bc',onClick:()=>{setPost(p);go('post');window.scrollTo({top:0});}},
+        React.createElement('div',{className:'bt',style:{background:p.bg}},p.em),
+        React.createElement('div',{className:'bb'},
+          React.createElement('div',{className:'bcat'},p.cat),
+          React.createElement('div',{className:'btitle'},p.title),
+          React.createElement('p',{className:'bex'},p.ex),
+          React.createElement('div',{className:'bmeta'},
+            React.createElement('span',{className:'bdate'},p.dt),
+            React.createElement('span',{className:'bread'},p.rt)
+          )
+        )
+      ))
+    )
+  );
+}
+
+/* ── POST PAGE ── */
+function PostPage({post,go}){
+  if(!post){go('blog');return null;}
+  return React.createElement('div',{className:'blog-pg'},
+    React.createElement('button',{className:'back-btn',onClick:()=>go('blog')},'← Back to Blog'),
+    React.createElement('div',{className:'post-wrap'},
+      React.createElement('div',{className:'bcat',style:{marginBottom:'16px'}},post.cat),
+      React.createElement('div',{className:'post-title'},post.title),
+      React.createElement('div',{className:'flex aic g16',style:{marginBottom:'34px',color:'var(--muted)',fontSize:'.8rem'}},
+        React.createElement('span',null,'📅 '+post.dt),
+        React.createElement('span',null,'⏱ '+post.rt)
+      ),
+      React.createElement('div',{className:'post-body',dangerouslySetInnerHTML:{__html:post.body}})
+    )
+  );
+}
+
+/* ── AUTH PAGE ── */
+function AuthPage({mode,go,login,add}){
+  const [isLogin,setIsLogin]=useState(mode==='login');
+  const [email,setEmail]=useState('');
+  const [pw,setPw]=useState('');
+  const [ld,setLd]=useState(false);
+  const [errs,setErrs]=useState({});
+
+  const validate=()=>{
+    const e={};
+    if(!email||!email.includes('@')||!email.includes('.'))e.email='Please enter a valid email';
+    if(!pw||pw.length<6)e.pw='Password must be at least 6 characters';
+    setErrs(e);return Object.keys(e).length===0;
+  };
+
+  const submit=async()=>{
+    if(!validate())return;
+    setLd(true);
+    try{
+      if(isLogin){
+        const u=checkLocalUser(email,pw);
+        if(!u){setErrs({general:'Incorrect email or password. Please try again.'});setLd(false);return;}
+        const sess={email:u.email,uid:u.uid};saveSession(sess);login(sess);
+        add('🎉','Welcome back!',`Signed in as ${email}`);go('dashboard');
+      }else{
+        const ok=saveLocalUser({email,pw,uid:'user_'+Date.now(),created:Date.now()});
+        if(!ok){setErrs({general:'This email is already registered. Please log in.'});setLd(false);return;}
+        const sess={email,uid:'user_'+Date.now()};saveSession(sess);login(sess);
+        add('🎉','Account created!','Welcome to WealthMind!');go('dashboard');
+      }
+    }catch(e){setErrs({general:'Something went wrong. Please try again.'});}
+    finally{setLd(false);}
+  };
+
+  return React.createElement('div',{className:'auth-pg'},
+    React.createElement('div',{className:'auth-glow'}),
+    React.createElement('div',{className:'auth-box anim-up'},
+      React.createElement('div',{className:'auth-lgo'},'WealthMind'),
+      React.createElement('div',{className:'auth-ttl'},isLogin?'Welcome Back':'Create Account'),
+      React.createElement('p',{className:'auth-sub'},isLogin?'Sign in to access your dashboard and tools.':'Join thousands learning to earn online.'),
+      errs.general&&React.createElement('div',{className:'err-box'},errs.general),
+      React.createElement('div',{className:'fg'},
+        React.createElement('label',{className:'fl'},'Email Address'),
+        React.createElement('input',{className:`inp wfull${errs.email?' inp-err':''}`,type:'email',placeholder:'you@example.com',value:email,onChange:e=>{setEmail(e.target.value);setErrs({});}}),
+        errs.email&&React.createElement('div',{className:'ferr mt8'},errs.email)
+      ),
+      React.createElement('div',{className:'fg'},
+        React.createElement('label',{className:'fl'},'Password'),
+        React.createElement('input',{className:`inp wfull${errs.pw?' inp-err':''}`,type:'password',placeholder:'Minimum 6 characters',value:pw,onChange:e=>{setPw(e.target.value);setErrs({});},onKeyDown:e=>e.key==='Enter'&&submit()}),
+        errs.pw&&React.createElement('div',{className:'ferr mt8'},errs.pw)
+      ),
+      React.createElement('button',{className:'btn btn-gld wfull',style:{justifyContent:'center',marginTop:'8px'},onClick:submit,disabled:ld},
+        ld?React.createElement(Sp):(isLogin?'🔑 Sign In':'🚀 Create Account')
+      ),
+      React.createElement('div',{className:'divider'},'or'),
+      React.createElement('div',{className:'auth-sw'},
+        isLogin
+          ?React.createElement(React.Fragment,null,"Don't have an account? ",React.createElement('button',{onClick:()=>{setIsLogin(false);setErrs({});}},'\u276F Sign Up Free'))
+          :React.createElement(React.Fragment,null,'Already have an account? ',React.createElement('button',{onClick:()=>{setIsLogin(true);setErrs({});}},'\u276F Sign In'))
+      ),
+      React.createElement('p',{style:{fontSize:'.7rem',color:'var(--muted2)',textAlign:'center',marginTop:'16px'}},'🔒 Your data is stored locally and never shared. By signing up you agree to our Terms of Service.')
+    )
+  );
+}
+
+/* ── DASHBOARD ── */
+function Dashboard({user,go,logout,add}){
+  const name=user?.email?.split('@')[0]||'Earner';
+  const leads=JSON.parse(localStorage.getItem('wm_leads_v1')||'[]');
+  return React.createElement('div',{className:'dash-pg anim-in'},
+    React.createElement('div',{className:'dash-greet'},'👋 Welcome back, '+name+'!'),
+    React.createElement('p',{className:'dash-sub2'},'Signed in as '+user?.email+' · Explore your income tools and track your progress'),
+    React.createElement('div',{className:'dash-stats'},
+      [
+        {v:'0',l:'Affiliate clicks',c:'var(--blue)',p:0},
+        {v:String(leads.length),l:'Leads collected',c:'var(--green)',p:Math.min(leads.length*10,100)},
+        {v:'$0',l:'Est. commissions',c:'var(--gold)',p:0},
+        {v:'40%',l:'Profile complete',c:'#9F7AEA',p:40},
+      ].map((s,i)=>React.createElement('div',{key:i,className:'ds'},
+        React.createElement('div',{className:'ds-v',style:{color:s.c}},s.v),
+        React.createElement('div',{className:'ds-l'},s.l),
+        React.createElement('div',{className:'prog-bar'},React.createElement('div',{className:'prog-fill',style:{width:s.p+'%',background:s.c}}))
+      ))
+    ),
+    React.createElement('h3',{style:{fontFamily:'var(--font-h)',fontSize:'1.15rem',fontWeight:700,marginBottom:'18px'}},'🚀 Your Recommended Tools'),
+    React.createElement('div',{className:'g4 mb24'},TOOLS.slice(0,4).map(t=>React.createElement(ToolCard,{key:t.id,t,add}))),
+    React.createElement('div',{className:'g2'},
+      React.createElement('div',{className:'card'},
+        React.createElement('h3',{style:{marginBottom:'14px'}},'📚 Latest Articles'),
+        POSTS.map((p,i)=>React.createElement('div',{key:i,onClick:()=>go('blog'),style:{padding:'10px 0',borderBottom:i<2?'1px solid var(--border)':'none',cursor:'pointer'}},
+          React.createElement('div',{style:{fontSize:'.84rem',fontWeight:600,marginBottom:'3px'}},p.title),
+          React.createElement('div',{style:{fontSize:'.73rem',color:'var(--muted)'}},p.rt)
+        ))
+      ),
+      React.createElement('div',{className:'card'},
+        React.createElement('h3',{style:{marginBottom:'14px'}},'⚡ Quick Actions'),
+        [
+          {ico:'🛠',l:'Browse All Tools',a:()=>go('tools')},
+          {ico:'📝',l:'Read Blog Posts',a:()=>go('blog')},
+          {ico:'📩',l:'Get Free Starter Kit',a:()=>go('home')},
+          {ico:'💼',l:'Start Freelancing',a:()=>window.open(AL.fiverr,'_blank','noopener')},
+          {ico:'🔗',l:'Join Affiliate Program',a:()=>window.open(AL.semrush,'_blank','noopener')},
+          {ico:'🚪',l:'Sign Out',a:()=>{clearSession();logout();go('home');}},
+        ].map((a,i)=>React.createElement('button',{
+          key:i,onClick:a.a,
+          style:{display:'flex',alignItems:'center',gap:'10px',width:'100%',background:'var(--bg4)',border:'1px solid var(--border)',borderRadius:'8px',padding:'11px 15px',color:'var(--text)',fontSize:'.83rem',cursor:'pointer',fontFamily:'var(--font-b)',marginBottom:'8px',transition:'all .2s'}
+        },a.ico,a.l))
+      )
+    )
+  );
+}
+
+/* ── THANK YOU PAGE ── */
+function ThankYouPage({go}){
+  const [prog,setProg]=useState(0);
+  const [cnt,setCnt]=useState(3);
+  useEffect(()=>{
+    let p=0;
+    const iv=setInterval(()=>{p+=1.67;setProg(p);if(p>=100){clearInterval(iv);window.open(AL.kit,'_blank','noopener,noreferrer');go('home');}},100);
+    const ic=setInterval(()=>setCnt(c=>Math.max(0,c-1)),1000);
+    return()=>{clearInterval(iv);clearInterval(ic);};
+  },[]);
+  return React.createElement('div',{className:'ty-pg'},
+    React.createElement('div',{className:'hg2'}),
+    React.createElement('div',{className:'ty-box anim-up'},
+      React.createElement('span',{className:'ty-icon'},'🎉'),
+      React.createElement('div',{className:'ty-title'},'You\'re In!'),
+      React.createElement('p',{className:'ty-sub'},'Your free WealthMind Starter Kit is on its way to your inbox. Check your email in the next few minutes.\n\nYou\'ll be redirected to a bonus resource in ',React.createElement('strong',{style:{color:'var(--gold)'}},cnt),' seconds...'),
+      React.createElement('div',{className:'rbar'},
+        'Redirecting to your bonus resource...',
+        React.createElement('div',{className:'rprog'},React.createElement('div',{className:'rfill',style:{width:Math.min(prog,100)+'%'}}))
+      ),
+      React.createElement('button',{className:'btn btn-out mt24',style:{margin:'24px auto 0',display:'flex'},onClick:()=>go('home')},'← Back to Home')
+    )
+  );
+}
+
+/* ── FOOTER ── */
+function Footer({go}){
+  const nv=(p)=>{go(p);window.scrollTo({top:0});};
+  return React.createElement('footer',{className:'footer'},
+    React.createElement('div',{className:'fg-grid'},
+      React.createElement('div',null,
+        React.createElement('div',{className:'f-logo'},'WealthMind'),
+        React.createElement('p',{className:'f-desc'},'Helping students, workers, and beginners build real online income through AI tools, digital skills, and smart strategies.'),
+        React.createElement('div',{style:{marginTop:'20px'}},
+          React.createElement('div',{className:'c-item'},React.createElement('span',{style:{color:'var(--blue)'}},'📞'),React.createElement('a',{href:'tel:+2334233534670116',style:{color:'var(--muted)',textDecoration:'none'}},'+233-4-233-53-467-0116')),
+          React.createElement('div',{className:'c-item'},React.createElement('span',{style:{color:'var(--blue)'}},'✉️'),React.createElement('a',{href:'mailto:paakwesikoomson32@gmail.com',style:{color:'var(--muted)',textDecoration:'none'}},'paakwesikoomson32@gmail.com')),
+          React.createElement('div',{className:'c-item'},React.createElement('span',{style:{color:'var(--blue)'}},'📍'),'290 Evolution')
+        )
+      ),
+      React.createElement('div',{className:'f-col'},
+        React.createElement('h4',null,'Learn'),
+        React.createElement('ul',null,
+          [['Home','home'],['How It Works','how'],['Income Streams','income'],['Blog','blog']].map(([l,p])=>
+            React.createElement('li',{key:p},React.createElement('button',{onClick:()=>nv(p)},l))
+          )
+        )
+      ),
+      React.createElement('div',{className:'f-col'},
+        React.createElement('h4',null,'Top Tools'),
+        React.createElement('ul',null,
+          TOOLS.slice(0,5).map(t=>React.createElement('li',{key:t.id},React.createElement('a',{href:t.lk,target:'_blank',rel:'noopener'},t.nm)))
+        )
+      ),
+      React.createElement('div',{className:'f-col'},
+        React.createElement('h4',null,'Company'),
+        React.createElement('ul',null,
+          [['Privacy Policy','#'],['Terms of Service','#'],['Affiliate Disclosure','#'],['Contact Us','mailto:paakwesikoomson32@gmail.com']].map(([l,h])=>
+            React.createElement('li',{key:l},React.createElement('a',{href:h,target:h.startsWith('mailto')?'_blank':'_self'},l))
+          )
+        )
+      )
+    ),
+    React.createElement('div',{className:'f-bot'},
+      React.createElement('p',null,'© 2026 WealthMind. All rights reserved. Built to help you earn.'),
+      React.createElement('p',null,'⚡ This site uses affiliate links. We earn a small commission — at no cost to you.')
+    )
+  );
+}
+
+/* ═══════════════════════════════════════════════════
+   APP ROOT
+═══════════════════════════════════════════════════ */
+function App(){
+  const [pg,setPg]=useState('home');
+  const [user,setUser]=useState(null);
+  const [post,setPost]=useState(null);
+  const [boot,setBoot]=useState(true);
+  const {toasts,add,rm}=useToast();
+
+  // Restore session
+  useEffect(()=>{
+    const sess=getSession();
+    if(sess)setUser(sess);
+    setTimeout(()=>setBoot(false),600);
+  },[]);
+
+  // Social proof toasts
+  useEffect(()=>{
+    const names=['James from Lagos 🇳🇬','Ama from Accra 🇬🇭','Priya from Delhi 🇮🇳','Carlos from Manila 🇵🇭','Grace from Nairobi 🇰🇪','Ahmed from Cairo 🇪🇬'];
+    let i=0;
+    const t=setTimeout(()=>{
+      const show=()=>{add('💸',names[i%names.length]+' joined','Just downloaded the Free Starter Kit');i++;};
+      show();
+      const iv=setInterval(show,15000);
+      return()=>clearInterval(iv);
+    },7000);
+    return()=>clearTimeout(t);
+  },[]);
+
+  const go=(p)=>{setPg(p);window.scrollTo({top:0,behavior:'smooth'});};
+  const logout=()=>{clearSession();setUser(null);};
+
+  if(boot)return React.createElement('div',{className:'load-scr'},React.createElement(Sp,{lg:true}),React.createElement('div',{className:'load-logo'},'WealthMind'));
+
+  const noFooter=['signup','login','thankyou'];
+  const renderPage=()=>{
+    switch(pg){
+      case 'home':      return React.createElement(Home,{go,add});
+      case 'how':       return React.createElement(HowPage,{go});
+      case 'income':    return React.createElement(IncomePage,{go,add});
+      case 'tools':     return React.createElement(ToolsPage,{add});
+      case 'blog':      return React.createElement(BlogPage,{go,setPost});
+      case 'post':      return React.createElement(PostPage,{post,go});
+      case 'signup':    return React.createElement(AuthPage,{mode:'signup',go,login:setUser,add});
+      case 'login':     return React.createElement(AuthPage,{mode:'login',go,login:setUser,add});
+      case 'dashboard': return user?React.createElement(Dashboard,{user,go,logout,add}):React.createElement(AuthPage,{mode:'login',go,login:setUser,add});
+      case 'thankyou':  return React.createElement(ThankYouPage,{go});
+      default:          return React.createElement(Home,{go,add});
+    }
+  };
+
+  return React.createElement(React.Fragment,null,
+    React.createElement(Nav,{pg,go,user,logout,add}),
+    React.createElement('main',null,renderPage()),
+    !noFooter.includes(pg)&&React.createElement(Footer,{go}),
+    React.createElement(Toasts,{toasts,rm})
+  );
+}
+
+const root=ReactDOM.createRoot(document.getElementById('root'));
+root.render(React.createElement(App));
+</script>
+</body>
+</html>
